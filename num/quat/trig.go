@@ -28,6 +28,9 @@ func Sinh(q Number) Number {
 	if uv == zero {
 		return lift(math.Sinh(w))
 	}
+	if IsInf(q) {
+		return Inf()
+	}
 	v := Abs(uv)
 	s, c := math.Sincos(v)
 	sh, ch := sinhcosh(w)
@@ -52,6 +55,9 @@ func Cosh(q Number) Number {
 	if uv == zero {
 		return lift(math.Cosh(w))
 	}
+	if IsInf(q) {
+		return Inf()
+	}
 	v := Abs(uv)
 	s, c := math.Sincos(v)
 	sh, ch := sinhcosh(w)
@@ -72,6 +78,9 @@ func Tanh(q Number) Number {
 	d := Cosh(q)
 	if d == zero {
 		return Inf()
+	}
+	if IsInf(q) {
+		return Number{Real: 1}
 	}
 	return Mul(Sinh(q), Inv(d))
 }
